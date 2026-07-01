@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import AdminLogin from './pages/AdminLogin.jsx';
 import ManageBlogs from './pages/ManageBlogs.jsx';
@@ -13,6 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/admin/login" replace />} />
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
