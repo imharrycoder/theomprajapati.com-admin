@@ -5,6 +5,7 @@ function AdminHeader() {
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('adminToken');
     navigate('/admin/login');
   };
 

@@ -1,46 +1,74 @@
 import { NavLink, Outlet } from "react-router-dom";
+import AdminHeader from "../components/AdminHeader.jsx";
 
 function AdminDashboard() {
   return (
-    <div className="flex h-screen bg-gray-100">
-      <div className="w-64 bg-white shadow-md">
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-gray-900">Admin Panel</h2>
+    <div className="admin-shell">
+      <aside className="admin-sidebar">
+        <div className="admin-brand">
+          <div>
+            <p className="text-sm uppercase tracking-[0.28em] text-[var(--muted)]">Admin</p>
+            <h2 className="text-3xl font-black text-white">Creator Hub</h2>
+          </div>
         </div>
-        <nav className="mt-6">
+
+        <nav className="admin-nav">
+          <NavLink
+            to="/admin/dashboard"
+            end
+            className={({ isActive }) =>
+              `admin-nav-link ${isActive ? "active" : ""}`
+            }
+          >
+            Overview
+          </NavLink>
           <NavLink
             to="/admin/dashboard/content"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
-            activeClassName="bg-gray-300"
+            className={({ isActive }) =>
+              `admin-nav-link ${isActive ? "active" : ""}`
+            }
           >
             Manage Content
           </NavLink>
           <NavLink
             to="/admin/dashboard/blogs"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
-            activeClassName="bg-gray-300"
+            className={({ isActive }) =>
+              `admin-nav-link ${isActive ? "active" : ""}`
+            }
           >
             Manage Blogs
           </NavLink>
           <NavLink
             to="/admin/dashboard/videos"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
-            activeClassName="bg-gray-300"
+            className={({ isActive }) =>
+              `admin-nav-link ${isActive ? "active" : ""}`
+            }
           >
             Manage Videos
           </NavLink>
           <NavLink
             to="/admin/dashboard/services"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
-            activeClassName="bg-gray-300"
+            className={({ isActive }) =>
+              `admin-nav-link ${isActive ? "active" : ""}`
+            }
           >
             Manage Services
           </NavLink>
         </nav>
-      </div>
-      <div className="flex-1 p-10">
+      </aside>
+
+      <main className="admin-main">
+        <AdminHeader />
+        <div className="page-header">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[var(--muted)]">
+              Welcome back
+            </p>
+            <h1 className="page-title">Admin Dashboard</h1>
+          </div>
+        </div>
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 }

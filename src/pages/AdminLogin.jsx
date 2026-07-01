@@ -31,15 +31,16 @@ function AdminLogin() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-900">Admin Login</h2>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 py-10">
+      <div className="w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/90 p-8 shadow-[0_30px_120px_rgba(10,20,40,0.45)] backdrop-blur-xl">
+        <div className="mb-8 text-center">
+          <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Admin Portal</p>
+          <h2 className="mt-4 text-4xl font-black text-white">Sign in to continue</h2>
+          <p className="mt-3 text-sm text-slate-400">Use your admin credentials to access content, blogs, videos, and services management.</p>
+        </div>
         <form className="space-y-6" onSubmit={handleLogin}>
           <div>
-            <label
-              htmlFor="username"
-              className="text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="username" className="block text-sm font-semibold text-slate-300">
               Username
             </label>
             <input
@@ -47,16 +48,13 @@ function AdminLogin() {
               name="username"
               type="text"
               required
-              className="w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-white outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div>
-            <label
-              htmlFor="password"
-              className="text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm font-semibold text-slate-300">
               Password
             </label>
             <input
@@ -64,16 +62,16 @@ function AdminLogin() {
               name="password"
               type="password"
               required
-              className="w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-white outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-rose-400">{error}</p>}
           <div>
             <button
               type="submit"
-              className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full rounded-2xl bg-gradient-to-r from-amber-400 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-500/20 transition hover:brightness-110"
             >
               Login
             </button>
