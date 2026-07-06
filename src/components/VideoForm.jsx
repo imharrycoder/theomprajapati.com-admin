@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { API_BASE_URL, authFetch } from '../api.js';
+import { apiFetch } from '../utils/api';
 
 function VideoForm() {
   const [title, setTitle] = useState('');
@@ -11,18 +11,19 @@ function VideoForm() {
 
   useEffect(() => {
     if (id) {
-      const url = API_BASE_URL ? `${API_BASE_URL}/videos/${id}` : `/videos/${id}`;
-      authFetch(url)
-        .then((response) => response.json())
+      apiFetch(`/videos/${id}`)
         .then((data) => {
           setTitle(data.title);
           setCategory(data.category);
           setDuration(data.duration);
+        })
+        .catch(() => {
+          // error is already handled and displayed by apiFetch
         });
     }
   }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newVideo = {
       title,
@@ -30,17 +31,18 @@ function VideoForm() {
       duration,
     };
 
-    const url = API_BASE_URL
-      ? `${API_BASE_URL}/videos${id ? `/${id}` : ''}`
-      : `/videos${id ? `/${id}` : ''}`;
+    const url = id ? `/videos/${id}` : '/videos';
     const method = id ? 'PUT' : 'POST';
 
-    authFetch(url, {
-      method,
-      body: JSON.stringify(newVideo),
-    }).then(() => {
+    try {
+      await apiFetch(url, {
+        method,
+        body: JSON.stringify(newVideo),
+      });
       navigate('/admin/dashboard/videos');
-    });
+    } catch (err) {
+      // error is already handled and displayed by apiFetch
+    }
   };
 
   return (

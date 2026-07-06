@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL, authFetch } from '../api.js';
+import { apiFetch } from '../utils/api';
 
 function ManageBlogs() {
   const [blogPosts, setBlogPosts] = useState([]);
 
   useEffect(() => {
-    const url = API_BASE_URL ? `${API_BASE_URL}/blogPosts` : '/blogPosts';
-    authFetch(url)
-      .then((response) => response.json())
-      .then((data) => setBlogPosts(data));
+    apiFetch('/blogPosts')
+      .then(setBlogPosts)
+      .catch(() => {
+        // error is already handled and displayed by apiFetch
+      });
   }, []);
 
-  const handleDelete = (id) => {
-    const url = API_BASE_URL ? `${API_BASE_URL}/blogPosts/${id}` : `/blogPosts/${id}`;
-    authFetch(url, { method: 'DELETE' }).then(() => {
+  const handleDelete = async (id) => {
+    try {
+      await apiFetch(`/blogPosts/${id}`, { method: 'DELETE' });
       setBlogPosts((current) => current.filter((post) => post.id !== id));
-    });
+    } catch (err) {
+      // error is already handled and displayed by apiFetch
+    }
   };
 
   return (
@@ -59,7 +62,7 @@ function ManageBlogs() {
                     <div className="text-sm text-gray-900">{post.category}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{post.date}</div>
+                    <div className="text-sm text-gray-900">{new Date(post.date).toLocaleDateString()}</div>
                   </td>
                   <td className="px-6 py-4 space-x-2 whitespace-nowrap">
                     <Link

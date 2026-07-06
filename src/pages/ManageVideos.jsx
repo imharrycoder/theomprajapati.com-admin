@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL, authFetch } from '../api.js';
+import { apiFetch } from '../utils/api';
 
 function ManageVideos() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    const url = API_BASE_URL ? `${API_BASE_URL}/videos` : '/videos';
-    authFetch(url)
-      .then((response) => response.json())
-      .then((data) => setVideos(data));
+    apiFetch('/videos')
+      .then(setVideos)
+      .catch(() => {
+        // error is already handled and displayed by apiFetch
+      });
   }, []);
 
-  const handleDelete = (id) => {
-    const url = API_BASE_URL ? `${API_BASE_URL}/videos/${id}` : `/videos/${id}`;
-    authFetch(url, { method: 'DELETE' }).then(() => {
+  const handleDelete = async (id) => {
+    try {
+      await apiFetch(`/videos/${id}`, { method: 'DELETE' });
       setVideos((current) => current.filter((video) => video.id !== id));
-    });
+    } catch (err) {
+      // error is already handled and displayed by apiFetch
+    }
   };
 
   return (
@@ -51,7 +54,7 @@ function ManageVideos() {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {videos.map((video) => (
-                <tr key={video.title}>
+                <tr key={video.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">{video.title}</div>
                   </td>
@@ -69,7 +72,7 @@ function ManageVideos() {
                       Edit
                     </Link>
                     <button
-                      onClick={() => handleDelete(video.title)}
+                      onClick={() => handleDelete(video.id)}
                       className="px-2 py-1 text-xs font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700"
                     >
                       Delete

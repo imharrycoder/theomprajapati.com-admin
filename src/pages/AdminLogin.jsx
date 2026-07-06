@@ -1,32 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiFetch } from '../utils/api';
 
 function AdminLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
     try {
-      const response = await fetch(`${baseUrl}/admin/login`, {
+      const data = await apiFetch('/admin/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
-
-      if (!response.ok) {
-        throw new Error('Invalid username or password');
-      }
-
-      const data = await response.json();
       localStorage.setItem('adminToken', data.token);
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/admin/dashboard');
     } catch (err) {
-      setError(err.message || 'Login failed');
+      // error is already handled and displayed by apiFetch
     }
   };
 
@@ -67,7 +59,6 @@ function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {error && <p className="text-sm text-rose-400">{error}</p>}
           <div>
             <button
               type="submit"

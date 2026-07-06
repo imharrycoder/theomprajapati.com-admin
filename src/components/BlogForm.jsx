@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { API_BASE_URL, authFetch } from '../api.js';
+import { apiFetch } from '../utils/api';
 
 function BlogForm() {
   const [title, setTitle] = useState('');
@@ -12,14 +12,15 @@ function BlogForm() {
 
   useEffect(() => {
     if (id) {
-      const url = API_BASE_URL ? `${API_BASE_URL}/blogPosts/${id}` : `/blogPosts/${id}`;
-      authFetch(url)
-        .then((response) => response.json())
+      apiFetch(`/blogPosts/${id}`)
         .then((data) => {
           setTitle(data.title);
           setCategory(data.category);
           setExcerpt(data.excerpt);
           setContent(data.content.map((c) => c.body).join('\n\n'));
+        })
+        .catch(() => {
+          // error is already handled and displayed by apiFetch
         });
     }
   }, [id]);
@@ -31,7 +32,7 @@ function BlogForm() {
       .replace(/[^\w-]+/g, '');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const slug = createSlug(title);
     const newPost = {
@@ -48,17 +49,18 @@ function BlogForm() {
       tags: [category],
     };
 
-    const url = API_BASE_URL
-      ? `${API_BASE_URL}/blogPosts${id ? `/${id}` : ''}`
-      : `/blogPosts${id ? `/${id}` : ''}`;
+    const url = id ? `/blogPosts/${id}` : '/blogPosts';
     const method = id ? 'PUT' : 'POST';
 
-    authFetch(url, {
-      method,
-      body: JSON.stringify(newPost),
-    }).then(() => {
+    try {
+      await apiFetch(url, {
+        method,
+        body: JSON.stringify(newPost),
+      });
       navigate('/admin/dashboard/blogs');
-    });
+    } catch (err) {
+      // error is already handled and displayed by apiFetch
+    }
   };
 
   return (

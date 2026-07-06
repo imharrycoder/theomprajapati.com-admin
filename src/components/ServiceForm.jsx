@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { API_BASE_URL, authFetch } from '../api.js';
+import { apiFetch } from '../utils/api';
 
 function ServiceForm() {
   const [title, setTitle] = useState('');
@@ -11,18 +11,19 @@ function ServiceForm() {
 
   useEffect(() => {
     if (id) {
-      const url = API_BASE_URL ? `${API_BASE_URL}/services/${id}` : `/services/${id}`;
-      authFetch(url)
-        .then((response) => response.json())
+      apiFetch(`/services/${id}`)
         .then((data) => {
           setTitle(data.title);
           setCategory(data.category);
           setDescription(data.description);
+        })
+        .catch(() => {
+          // error is already handled and displayed by apiFetch
         });
     }
   }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newService = {
       title,
@@ -30,17 +31,18 @@ function ServiceForm() {
       description,
     };
 
-    const url = API_BASE_URL
-      ? `${API_BASE_URL}/services${id ? `/${id}` : ''}`
-      : `/services${id ? `/${id}` : ''}`;
+    const url = id ? `/services/${id}` : '/services';
     const method = id ? 'PUT' : 'POST';
 
-    authFetch(url, {
-      method,
-      body: JSON.stringify(newService),
-    }).then(() => {
+    try {
+      await apiFetch(url, {
+        method,
+        body: JSON.stringify(newService),
+      });
       navigate('/admin/dashboard/services');
-    });
+    } catch (err) {
+      // error is already handled and displayed by apiFetch
+    }
   };
 
   return (
@@ -78,7 +80,7 @@ function ServiceForm() {
           />
         </div>
         <div>
-.          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
             Description
           </label>
           <textarea

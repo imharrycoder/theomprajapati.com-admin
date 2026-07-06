@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL, authFetch } from '../api.js';
+import { apiFetch } from '../utils/api';
 
 function ManageServices() {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    const url = API_BASE_URL ? `${API_BASE_URL}/services` : '/services';
-    authFetch(url)
-      .then((response) => response.json())
-      .then((data) => setServices(data));
+    apiFetch('/services')
+      .then(setServices)
+      .catch(() => {
+        // error is already handled and displayed by apiFetch
+      });
   }, []);
 
-  const handleDelete = (id) => {
-    const url = API_BASE_URL ? `${API_BASE_URL}/services/${id}` : `/services/${id}`;
-    authFetch(url, { method: 'DELETE' }).then(() => {
+  const handleDelete = async (id) => {
+    try {
+      await apiFetch(`/services/${id}`, { method: 'DELETE' });
       setServices((current) => current.filter((service) => service.id !== id));
-    });
+    } catch (err) {
+      // error is already handled and displayed by apiFetch
+    }
   };
 
   return (
