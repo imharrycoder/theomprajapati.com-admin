@@ -120,7 +120,7 @@ export const defaultSiteContent = {
     facebookLabel: 'Watch on Facebook',
     facebookUrl: 'https://www.facebook.com/theomprajapati',
     instagramLabel: 'Follow on Instagram',
-    instagramUrl: 'https://www.instagram.com/theomprajapati',
+    instagramUrl: 'https://www.instagram.com/the.omprajapati',
   },
   latestBlogs: {
     enabled: true,
