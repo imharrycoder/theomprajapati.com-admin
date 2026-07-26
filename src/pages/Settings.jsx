@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import apiFetch from '../../../shared/api/apiFetch';
+import { apiFetch } from '../utils/api';
 import { User, Lock, KeyRound } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ function Settings() {
 
     try {
       setLoading(true);
-      const res = await apiFetch('/api/admin/credentials', {
+      const res = await apiFetch('/admin/credentials', {
         method: 'PUT',
         body: JSON.stringify({
           currentPassword,
