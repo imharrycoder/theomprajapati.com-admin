@@ -1,37 +1,72 @@
 import { toast } from 'react-toastify';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+/**
+ * Factory that creates a configured API fetch function.
+ */
+function createApiFetch(tokenStorageKey) {
+  const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+  const apiBaseUrl =
+    configuredApiBaseUrl || (import.meta.env.DEV ? 'http://localhost:5000' : 'https://api.theomprajapati.com');
 
-function getAuthToken() {
-  return localStorage.getItem('adminToken');
-}
-
-export async function apiFetch(url, options = {}) {
-  const headers = {
-    'Content-Type': 'application/json',
-    ...options.headers,
-  };
-
-  const token = getAuthToken();
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
+  function getAuthToken() {
+    return localStorage.getItem(tokenStorageKey);
   }
 
-  try {
-    const response = await fetch(`${API_BASE_URL}${url}`, { ...options, headers });
-    const data = await response.json();
+  async function apiFetch(url, options = {}) {
+    const { suppressToast = false, ...fetchOptions } = options;
+    const headers = {
+      'Content-Type': 'application/json',
+      ...fetchOptions.headers,
+    };
 
-    if (!response.ok) {
-      throw new Error(data.error || 'Something went wrong');
+    const token = getAuthToken();
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
     }
 
-    if (data.message) {
-      toast.success(data.message);
+    try {
+      const requestUrl = url.startsWith('http') ? url : `${apiBaseUrl}${url}`;
+      const response = await fetch(requestUrl, { ...fetchOptions, headers });
+      const responseText = await response.text();
+      let data = {};
+
+      try {
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        data = { error: responseText || 'Invalid API response' };
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      if (data.message && !suppressToast) {
+        toast.success(data.message);
+      }
+
+      return data;
+    } catch (error) {
+      const message =
+        error instanceof TypeError && error.message === 'Failed to fetch'
+          ? `Could not reach the API at ${apiBaseUrl}. Check VITE_API_BASE_URL or start the API server.`
+          : error.message;
+
+      if (!suppressToast) {
+        toast.error(message);
+      }
+
+      throw new Error(message);
     }
-    
-    return data;
-  } catch (error) {
-    toast.error(error.message);
-    throw error;
   }
+
+  apiFetch.baseUrl = apiBaseUrl;
+
+  return apiFetch;
 }
+
+/**
+ * Admin panel API client — uses 'adminToken' from localStorage.
+ */
+export const apiFetch = createApiFetch('adminToken');
+export const API_BASE_URL = apiFetch.baseUrl;

@@ -42,10 +42,13 @@ function ManageVideos() {
                   Title
                 </th>
                 <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b">
-                  Category
+                  Platform
                 </th>
                 <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b">
-                  Duration
+                  Publish Date
+                </th>
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b">
+                  Featured
                 </th>
                 <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b">
                   Actions
@@ -59,10 +62,15 @@ function ManageVideos() {
                     <div className="text-sm text-gray-900">{video.title}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{video.category}</div>
+                    <div className="text-sm text-gray-900">{video.platform}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{video.duration}</div>
+                    <div className="text-sm text-gray-900">
+                      {new Date(video.publishDate).toLocaleDateString()}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{video.featured ? 'Yes' : 'No'}</div>
                   </td>
                   <td className="px-6 py-4 space-x-2 whitespace-nowrap">
                     <Link
