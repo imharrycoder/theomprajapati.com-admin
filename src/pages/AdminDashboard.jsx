@@ -62,6 +62,14 @@ function AdminDashboard() {
           >
             Manage Subscriptions
           </NavLink>
+          <NavLink
+            to="/admin/dashboard/settings"
+            className={({ isActive }) =>
+              `admin-nav-link ${isActive ? "active" : ""}`
+            }
+          >
+            Settings
+          </NavLink>
         </nav>
       </aside>
 
