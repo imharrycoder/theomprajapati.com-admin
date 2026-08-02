@@ -71,6 +71,14 @@ function AdminDashboard() {
             Project Leads
           </NavLink>
           <NavLink
+            to="/admin/dashboard/performance"
+            className={({ isActive }) =>
+              `admin-nav-link ${isActive ? "active" : ""}`
+            }
+          >
+            Reach & Performance
+          </NavLink>
+          <NavLink
             to="/admin/dashboard/settings"
             className={({ isActive }) =>
               `admin-nav-link ${isActive ? "active" : ""}`
