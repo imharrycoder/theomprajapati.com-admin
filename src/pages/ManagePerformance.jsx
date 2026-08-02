@@ -167,7 +167,7 @@ function ManagePerformance() {
               <li>Go to IAM & Admin &gt; Service Accounts. Create a new Service Account.</li>
               <li>Create and download a new JSON key for this Service Account.</li>
               <li>Add the Service Account email as a "Viewer" in your Google Analytics Property and as a "Restricted User" in Google Search Console.</li>
-              <li>Stringify the JSON key and save it in your backend <code>.env</code> file as <code>GOOGLE_APPLICATION_CREDENTIALS_JSON='{...}'</code>.</li>
+              <li>Stringify the JSON key and save it in your backend <code>.env</code> file as <code>GOOGLE_APPLICATION_CREDENTIALS_JSON='{"{...}"}'</code>.</li>
               <li>Add <code>GA_PROPERTY_ID="your-ga4-property-id"</code> to your backend <code>.env</code>.</li>
               <li>Restart your backend server.</li>
             </ol>
