@@ -212,8 +212,11 @@ function ManagePerformance() {
                         responsive: true,
                         maintainAspectRatio: false,
                         interaction: { mode: 'index', intersect: false },
-                        plugins: { legend: { position: 'top' } },
-                        scales: { y: { beginAtZero: true } },
+                        plugins: { legend: { position: 'top', labels: { color: '#374151' } } },
+                        scales: { 
+                          x: { ticks: { color: '#6B7280' }, grid: { color: '#F3F4F6' } },
+                          y: { beginAtZero: true, ticks: { color: '#6B7280' }, grid: { color: '#F3F4F6' } } 
+                        },
                       }}
                     />
                   </div>
@@ -244,8 +247,11 @@ function ManagePerformance() {
                         responsive: true,
                         maintainAspectRatio: false,
                         interaction: { mode: 'index', intersect: false },
-                        plugins: { legend: { position: 'top' } },
-                        scales: { y: { beginAtZero: true } },
+                        plugins: { legend: { position: 'top', labels: { color: '#374151' } } },
+                        scales: { 
+                          x: { ticks: { color: '#6B7280' }, grid: { color: '#F3F4F6' } },
+                          y: { beginAtZero: true, ticks: { color: '#6B7280' }, grid: { color: '#F3F4F6' } } 
+                        },
                       }}
                     />
                   </div>
