@@ -41,7 +41,7 @@ function ManagePerformance() {
 
   // Load config
   useEffect(() => {
-    apiFetch('/analytics/config')
+    apiFetch('/admin/analytics/config')
       .then((res) => {
         setConfig(res);
         setLoadingConfig(false);
@@ -68,7 +68,7 @@ function ManagePerformance() {
 
   const fetchTrafficData = (p) => {
     setLoadingTraffic(true);
-    apiFetch(`/analytics/traffic?period=${p}`)
+    apiFetch(`/admin/analytics/traffic?period=${p}`)
       .then(setTrafficData)
       .catch(() => {})
       .finally(() => setLoadingTraffic(false));
@@ -76,7 +76,7 @@ function ManagePerformance() {
 
   const fetchSearchData = (p) => {
     setLoadingSearch(true);
-    apiFetch(`/analytics/search?period=${p}`)
+    apiFetch(`/admin/analytics/search?period=${p}`)
       .then(setSearchData)
       .catch(() => {})
       .finally(() => setLoadingSearch(false));
@@ -84,7 +84,7 @@ function ManagePerformance() {
 
   const fetchPageSpeed = (strat) => {
     setLoadingPageSpeed(true);
-    apiFetch(`/analytics/pagespeed?strategy=${strat}`)
+    apiFetch(`/admin/analytics/pagespeed?strategy=${strat}`)
       .then(setPageSpeed)
       .catch(() => {})
       .finally(() => setLoadingPageSpeed(false));
