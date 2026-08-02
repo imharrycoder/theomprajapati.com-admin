@@ -8,6 +8,7 @@ import ManageServices from './pages/ManageServices.jsx';
 import ManageVideos from './pages/ManageVideos.jsx';
 import ManageUsers from './pages/ManageUsers.jsx';
 import Settings from './pages/Settings.jsx';
+import ManageLeads from './pages/ManageLeads.jsx';
 import BlogForm from './components/BlogForm.jsx';
 import ServiceForm from './components/ServiceForm.jsx';
 import VideoForm from './components/VideoForm.jsx';
@@ -43,6 +44,7 @@ function App() {
             <Route path="services/new" element={<ServiceForm />} />
             <Route path="services/edit/:id" element={<ServiceForm />} />
             <Route path="users" element={<ManageUsers />} />
+            <Route path="leads" element={<ManageLeads />} />
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
