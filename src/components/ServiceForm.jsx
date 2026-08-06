@@ -6,6 +6,7 @@ function ServiceForm() {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
+  const [displayOnHome, setDisplayOnHome] = useState(true);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -16,6 +17,7 @@ function ServiceForm() {
           setTitle(data.title);
           setCategory(data.category);
           setDescription(data.description);
+          setDisplayOnHome(data.displayOnHome ?? true);
         })
         .catch(() => {
           // error is already handled and displayed by apiFetch
@@ -29,6 +31,7 @@ function ServiceForm() {
       title,
       category,
       description,
+      displayOnHome,
     };
 
     const url = id ? `/services/${id}` : '/services';
@@ -92,6 +95,19 @@ function ServiceForm() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
+        </div>
+        <div className="flex items-center">
+          <input
+            id="displayOnHome"
+            name="displayOnHome"
+            type="checkbox"
+            className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+            checked={displayOnHome}
+            onChange={(e) => setDisplayOnHome(e.target.checked)}
+          />
+          <label htmlFor="displayOnHome" className="block ml-2 text-sm text-gray-900">
+            Display this service on the Homepage
+          </label>
         </div>
         <div>
           <button

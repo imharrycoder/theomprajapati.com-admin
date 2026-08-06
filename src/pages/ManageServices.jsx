@@ -22,6 +22,20 @@ function ManageServices() {
     }
   };
 
+  const handleToggleHome = async (service) => {
+    try {
+      const updated = await apiFetch(`/services/${service.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ ...service, displayOnHome: !service.displayOnHome }),
+      });
+      setServices((current) =>
+        current.map((s) => (s.id === updated.id ? updated : s))
+      );
+    } catch (err) {
+      // error handled by apiFetch
+    }
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-bold text-gray-900">Manage Services</h2>
@@ -45,6 +59,9 @@ function ManageServices() {
                   Category
                 </th>
                 <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b">
+                  Show on Home
+                </th>
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b">
                   Actions
                 </th>
               </tr>
@@ -57,6 +74,16 @@ function ManageServices() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">{service.category}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <button
+                      onClick={() => handleToggleHome(service)}
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        service.displayOnHome ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                      }`}
+                    >
+                      {service.displayOnHome ? 'Yes' : 'No'}
+                    </button>
                   </td>
                   <td className="px-6 py-4 space-x-2 whitespace-nowrap">
                     <Link
