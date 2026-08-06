@@ -31,6 +31,14 @@ function AdminDashboard() {
             Manage Content
           </NavLink>
           <NavLink
+            to="/admin/dashboard/about"
+            className={({ isActive }) =>
+              `admin-nav-link ${isActive ? "active" : ""}`
+            }
+          >
+            Manage About Page
+          </NavLink>
+          <NavLink
             to="/admin/dashboard/blogs"
             className={({ isActive }) =>
               `admin-nav-link ${isActive ? "active" : ""}`

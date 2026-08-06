@@ -183,4 +183,186 @@ export const defaultSiteContent = {
       },
     ],
   },
+  aboutPage: {
+    hero: {
+      enabled: true,
+      title: 'Building Digital Products That Deliver Results',
+      description: "Hi, I'm **Om Prajapati** — a Full Stack Developer, AI Solutions Engineer, and Digital Growth Consultant passionate about building modern digital products that solve real business problems.\n\nI specialize in developing websites, web applications, AI-powered solutions, automation systems, mobile applications, and SEO-optimized platforms that are scalable, secure, and easy to maintain.\n\nWith a background in software development, content strategy, and search engine optimization, I combine technical expertise with business understanding to create solutions that not only work exceptionally well but also help businesses grow.",
+    },
+    vision: {
+      enabled: true,
+      title: 'Vision',
+      heading: 'Making Technology Simple, Reliable, and Affordable.',
+      description: 'Technology should empower everyone—not just large enterprises.\n\nMy vision is to create digital products and AI-powered solutions that simplify complex processes, deliver reliable performance, and remain affordable for startups, small businesses, creators, and enterprises.',
+      principles: [
+        { title: 'Simple', description: 'Building intuitive products that are easy to understand, easy to use, and focused on solving real-world problems.' },
+        { title: 'Reliable', description: 'Developing secure, scalable, maintainable, and high-performance software businesses can trust for years.' },
+        { title: 'Affordable', description: 'Delivering premium-quality digital solutions at practical costs so more businesses can leverage modern technology.' },
+      ],
+      footer: 'My long-term goal is to help businesses adopt AI, automation, and modern software to increase productivity, reduce manual work, and accelerate sustainable growth.',
+    },
+    mission: {
+      enabled: true,
+      title: 'Mission',
+      description: 'My mission is to design and develop modern websites, AI-powered applications, automation systems, and digital solutions that improve productivity, enhance user experience, and create measurable business value.',
+    },
+    education: {
+      enabled: true,
+      title: 'Education',
+      items: [
+        { degree: 'Bachelor of Science (Computer Science)', institution: 'Maharana Pratap College of Allied Science' },
+      ],
+    },
+    experience: {
+      enabled: true,
+      title: 'Professional Experience',
+      items: [
+        { role: 'Content Writer', company: 'Combiz Services Pvt. Ltd.', bullets: ['Increased content productivity by 70–80%', 'Technical content writing', 'Research-based articles', 'SEO content creation', 'Marketing collaboration'] },
+        { role: 'Content Writer', company: 'TeaCurry', bullets: ['Keyword Research', 'Shopify Product Listing', 'Search Engine Optimization', 'Content Writing'] },
+      ],
+    },
+    skills: {
+      enabled: true,
+      title: 'Technical Skills',
+      categories: [
+        {
+          name: 'Frontend Development',
+          items: [
+            { name: 'React.js', percentage: 95 },
+            { name: 'Next.js', percentage: 85 },
+            { name: 'HTML5', percentage: 98 },
+            { name: 'CSS3', percentage: 96 },
+            { name: 'Tailwind CSS', percentage: 95 },
+            { name: 'JavaScript', percentage: 94 },
+            { name: 'TypeScript', percentage: 88 },
+            { name: 'React Native', percentage: 82 },
+          ],
+        },
+        {
+          name: 'Backend Development',
+          items: [
+            { name: 'Node.js', percentage: 93 },
+            { name: 'Express.js', percentage: 92 },
+            { name: 'NestJS', percentage: 82 },
+            { name: 'REST APIs', percentage: 95 },
+            { name: 'Authentication & JWT', percentage: 92 },
+          ],
+        },
+        {
+          name: 'Database',
+          items: [
+            { name: 'MySQL', percentage: 93 },
+            { name: 'SQLite', percentage: 82 },
+            { name: 'MongoDB', percentage: 80 },
+          ],
+        },
+        {
+          name: 'AI & Automation',
+          items: [
+            { name: 'OpenAI API', percentage: 92 },
+            { name: 'AI Chatbots', percentage: 93 },
+            { name: 'Prompt Engineering', percentage: 96 },
+            { name: 'Workflow Automation', percentage: 88 },
+            { name: 'AI Content Systems', percentage: 90 },
+          ],
+        },
+        {
+          name: 'SEO & Digital Marketing',
+          items: [
+            { name: 'Technical SEO', percentage: 96 },
+            { name: 'On-Page SEO', percentage: 95 },
+            { name: 'Google Search Console', percentage: 95 },
+            { name: 'Google Analytics', percentage: 90 },
+            { name: 'Keyword Research', percentage: 96 },
+            { name: 'Content Strategy', percentage: 95 },
+          ],
+        },
+        {
+          name: 'CMS',
+          items: [
+            { name: 'WordPress', percentage: 95 },
+            { name: 'Blogger', percentage: 90 },
+            { name: 'Shopify', percentage: 80 },
+          ],
+        },
+        {
+          name: 'Cloud & Hosting',
+          items: [
+            { name: 'Hostinger', percentage: 95 },
+            { name: 'Netlify', percentage: 90 },
+            { name: 'Vercel', percentage: 90 },
+            { name: 'Google Cloud', percentage: 78 },
+          ],
+        },
+        {
+          name: 'Version Control',
+          items: [
+            { name: 'Git', percentage: 90 },
+            { name: 'GitHub', percentage: 90 },
+          ],
+        },
+        {
+          name: 'UI / Media',
+          items: [
+            { name: 'Responsive Design', percentage: 94 },
+            { name: 'UI/UX Design', percentage: 85 },
+            { name: 'Video Editing', percentage: 90 },
+            { name: 'Short Video Editing', percentage: 90 },
+            { name: 'Photo Editing', percentage: 85 },
+          ],
+        },
+      ],
+    },
+    services: {
+      enabled: true,
+      title: 'Services',
+      items: [
+        'Website Development',
+        'Landing Pages',
+        'Business Websites',
+        'Portfolio Websites',
+        'E-Commerce Development',
+        'AI Chatbot Development',
+        'AI Integration',
+        'Custom Admin Dashboards',
+        'Mobile App Development',
+        'REST API Development',
+        'Database Design',
+        'Website Performance Optimization',
+        'Technical SEO',
+        'WordPress Development',
+        'Blog Systems',
+        'Digital Marketing',
+        'Content Writing',
+        'Video Editing',
+        'Short Video Editing',
+        'AI Workflow Automation',
+      ],
+    },
+    whyWorkWithMe: {
+      enabled: true,
+      title: 'Why Work With Me?',
+      items: [
+        'Clean & Maintainable Code',
+        'AI-First Development',
+        'Mobile-Responsive Design',
+        'SEO-Optimized Architecture',
+        'High Performance',
+        'Secure Development',
+        'Scalable Solutions',
+        'Business-Oriented Thinking',
+        'Long-Term Technical Support',
+      ],
+    },
+    techStack: {
+      enabled: true,
+      title: 'Technology Stack',
+      content: 'React • Next.js • React Native • Node.js • Express.js • NestJS • JavaScript • TypeScript • HTML5 • CSS3 • Tailwind CSS • MySQL • SQLite • MongoDB • Git • GitHub • WordPress • Hostinger • Netlify • Vercel • Google Cloud • OpenAI API • SEO • Google Analytics • Search Console',
+    },
+    footerCTA: {
+      enabled: true,
+      title: "Let's Build Something Amazing",
+      description: "Whether you're launching a startup, scaling an existing business, or exploring AI-powered solutions, I'm committed to delivering technology that is **Simple, Reliable, and Affordable**.\n\nLet's transform your ideas into impactful digital products.",
+    }
+  },
 };
